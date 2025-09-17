@@ -29,7 +29,7 @@ public class OrdenTrabajo {
                         String observaciones,
                         EstadoOrden estado) {
         this.id = id;
-        this.cliente_id = "";
+        this.setCliente_id("");
         this.nombre = nombre;
         this.apellido = apellido;
         this.tipoDeMaquina = tipoDeMaquina;
@@ -60,10 +60,6 @@ public class OrdenTrabajo {
     	return this.apellido;
     }    
     
-    public String getClienteId(){
-    	return null;
-    }
-    
     public String getTipoDeMaquina(){
     	return this.tipoDeMaquina;
     }
@@ -86,6 +82,10 @@ public class OrdenTrabajo {
 	public String getId() {
 		return this.id;
 	}
+	
+	public void setId(String id) {
+		this.id = id;
+	}
 
 	public List<Repuesto> getRepuestos() {
 		return null;
@@ -99,7 +99,16 @@ public class OrdenTrabajo {
 	public void setReparacion(String reparacion) {
 		this.reparacion = reparacion;
 	}
-
+	
+	public String getNombre()
+	{
+		return this.nombre;
+	}
+	
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	
 	public LocalDateTime getFechaRetiro() {
 		return fechaRetiro;
 	}
@@ -118,6 +127,35 @@ public class OrdenTrabajo {
 
 	public void setEstado(EstadoOrden estado) {
 		this.estado = estado;
+	}
+
+	public String getCliente_id() {
+		return cliente_id;
+	}
+
+	public void setCliente_id(String cliente_id) {
+		this.cliente_id = cliente_id;
+	}
+
+	public void setApellido(String apellido) {
+		// TODO Auto-generated method stub
+		this.apellido = apellido;
+	}
+
+	public void setTipoMaquina(String tipoDeMaquina) {
+		// TODO Auto-generated method stub
+		this.tipoDeMaquina = tipoDeMaquina;
+	}
+
+	public void setProblema(String descripcionProblema) {
+		// TODO Auto-generated method stub
+		this.descripcionProblema = descripcionProblema;
+	}
+
+	public void setFechaIngreso(LocalDateTime fechaIngreso2) {
+		
+		this.fechaIngreso = fechaIngreso2;
+		
 	}
 
 }
