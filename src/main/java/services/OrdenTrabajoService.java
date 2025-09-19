@@ -1,6 +1,8 @@
 package services;
 
 import mgist.app.models.*;
+import persistence.daos.OrdenTrabajoDAO;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,8 +14,34 @@ public class OrdenTrabajoService {
         ordenes.add(orden);
     }
 
-    public List<OrdenTrabajo> listarOrdenes() {
-        return ordenes;
+    public void listarOrdenes() {
+    	List<OrdenTrabajo> ordenesDB = new ArrayList<>();
+    	System.out.println("OT SERVICE ");
+       try {
+		ordenesDB = OrdenTrabajoDAO.listarOrdenesDB();
+    	System.out.println("OT SERVICE BLOQUE TRY CATCH ");
+    	
+    	if(ordenesDB.isEmpty()) {
+    		System.out.println("NOTHING");
+    		}
+		
+		for(OrdenTrabajo orden : ordenesDB) {
+		    System.out.println("🆔 ID: " + orden.getId());
+		    System.out.println("👤 Cliente: " + orden.getNombreCliente() + " " + orden.getApellidoCliente());
+		    System.out.println("🔧 Máquina: " + orden.getTipoDeMaquina());
+		    System.out.println("📅 Ingreso: " + (orden.getFechaIngreso() != null ? orden.getFechaIngreso().toString() : "Sin fecha"));
+		    System.out.println("📅 Retiro: " + (orden.getFechaRetiro() != null ? orden.getFechaRetiro().toString() : "Pendiente"));
+		    System.out.println("📋 Problema: " + orden.getDescripcionProblema());
+		    System.out.println("🛠️ Repar)ación: " + orden.getReparacion());
+		    System.out.println("🗒️ Observaciones: " + orden.getObservaciones());
+		    System.out.println("📌 Estado: " + orden.getEstado());
+		    System.out.println("──────────────────────────────────────────────");
+		}
+		
+	   } catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	   }
     }
     
     public void mostrarOrdenesDetalladas() {
@@ -52,7 +80,6 @@ public class OrdenTrabajoService {
     	}
     	return null;
     }
-    
-    //Podés agregar métodos como buscarPorCliente(), actualizarEstado(), etc.
+     //Podés agregar métodos como buscarPorCliente(), actualizarEstado(), etc.
 }
 

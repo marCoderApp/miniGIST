@@ -67,7 +67,7 @@ public class OrdenTrabajoFlow {
 
     public static void listarOrdenes() {
         System.out.println("\n📦 Órdenes registradas:");
-        servicio.mostrarOrdenesDetalladas();
+        servicio.listarOrdenes();
     }
 
     public static void marcarComoRetirada(Scanner scanner) {

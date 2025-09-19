@@ -75,78 +75,81 @@ public class OrdenTrabajoDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        return null;
-    }
+        return null;}
     
     
-    public List<OrdenTrabajo> listarOrdenes(){
+    public static List<OrdenTrabajo> listarOrdenesDB(){
+    	List<OrdenTrabajo> lista = new ArrayList<>();
     	try(Connection conn = SQLiteConnector.connect();
     		PreparedStatement stmt = conn.prepareStatement("SELECT * FROM ordenes_trabajo")){
     		
     		ResultSet rs = stmt.executeQuery(); 
     		
-    		String fechaStr = rs.getString("fecha_ingreso");
-    		String fechaRetiroStr = rs.getString("fecha_Retiro");
-    		LocalDateTime fechaIngresoFinal;
-    		LocalDateTime fechaRetiroFinal;
-    		
-    		//Prepare fecha field:
-    		if (fechaStr != null && !fechaStr.isEmpty()) {
-			    try {
-			        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-			        LocalDateTime fechaIngreso = LocalDateTime.parse(fechaStr, formatter);
-			        fechaIngresoFinal = fechaIngreso;
-			    } catch (DateTimeParseException e) {
-			        System.out.println("Formato de fecha inválido: " + fechaStr);
-			        fechaIngresoFinal = null;
-			    }
-			}
-    		
-    		if (fechaRetiroStr != null && !fechaRetiroStr.isEmpty()) {
-			    try {
-			        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-			        LocalDateTime fechaRetiro = LocalDateTime.parse(fechaStr, formatter);
-			        fechaRetiroFinal = fechaRetiro;
-			    } catch (DateTimeParseException e) {
-			        System.out.println("Formato de fecha inválido: " + fechaStr);
-			        fechaRetiroFinal = null;
-			    }
-			    
+    	
 			    //==========================================
+				
+				//=============VARIABLES================//
+
+				//======================================//
 			
     		
-    		List<OrdenTrabajo> lista = new ArrayList<>();
-    		
+ 
+    		//Initialize variables before to solve this
     		while(rs.next()) {
-    			OrdenTrabajo orden = new OrdenTrabajo(
-    					orden.setId(rs.getString("id")),
-    	    			orden.setCliente_id(rs.getString("cliente_id")),
-    	    			orden.setNombre(rs.getString("nombre_cliente")),
-    	    			orden.setApellido(rs.getString("apellido_cliente")),
-    	    			orden.setTipoMaquina(rs.getString("tipo_maquina")),
-    	    			orden.setProblema(rs.getString("problema")),
-    	    			orden.setReparacion(rs.getString("reparacion")),
-    	    			orden.setObservaciones(rs.getString("observaciones")),
-    	    			fechaIngresoFinal,
-    	    			fechaRetiroFinal,
-    					);
-    		
     			
-    		
+    			String fechaStr = rs.getString("fecha_ingreso");
+        		String fechaRetiroStr = rs.getString("fecha_Retiro");
+        		LocalDateTime fechaIngresoFinal = null;
+        		LocalDateTime fechaRetiroFinal = null;
+        		
+        		System.out.println("DOESNT WORKS");
+        		
+        		//Prepare fecha field:
+        		if (fechaStr != null && !fechaStr.isEmpty()) {
+    			    try {
+    			        LocalDateTime fechaIngreso = LocalDateTime.parse(fechaStr, formatter);
+    			        fechaIngresoFinal = fechaIngreso;
+    			    } catch (DateTimeParseException e) {
+    			        System.out.println("Formato de fecha de ingreso inválido: " + fechaStr);
+    			        fechaIngresoFinal = null;
+    			    }
     			}
+        		
+        		if (fechaRetiroStr != null && !fechaRetiroStr.isEmpty()) {
+    			    try {
+    			        LocalDateTime fechaRetiro = LocalDateTime.parse(fechaRetiroStr, formatter);
+    			        fechaRetiroFinal = fechaRetiro;
+    			    } catch (DateTimeParseException e) {
+    			        System.out.println("Formato de fecha inválido: " + fechaRetiroStr);
+    			        fechaRetiroFinal = null;
+    			    }
+    			}
+        		
+        		 EstadoOrden estado = EstadoOrden.valueOf(rs.getString("estado"));	
+        		OrdenTrabajo orden = new OrdenTrabajo(
+    					rs.getString("id"),
+    					rs.getString("cliente_id"),
+    					rs.getString("nombre_cliente"),
+    					rs.getString("apellido_cliente"),
+    					rs.getString("tipo_maquina"),
+    					rs.getString("problema"),
+    					fechaIngresoFinal,
+    					fechaRetiroFinal,
+    					rs.getString("reparacion"),
+    					rs.getString("observaciones"),
+    					estado
+    					);
     			
-    			String estadoStr = rs.getString("estado");
     			
-    			
-    			
-    			;
+    			lista.add(orden);
     		}
     		
-    		
-    	}catch () {
-    		
+    	}catch (SQLException e) {
+    		e.printStackTrace();
     	}
+    	
+    	System.out.println("Hola ");
+    	
+    	return lista;
     }
-    
 }
