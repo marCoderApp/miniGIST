@@ -16,14 +16,8 @@ public class OrdenTrabajoService {
 
     public void listarOrdenes() {
     	List<OrdenTrabajo> ordenesDB = new ArrayList<>();
-    	System.out.println("OT SERVICE ");
        try {
 		ordenesDB = OrdenTrabajoDAO.listarOrdenesDB();
-    	System.out.println("OT SERVICE BLOQUE TRY CATCH ");
-    	
-    	if(ordenesDB.isEmpty()) {
-    		System.out.println("NOTHING");
-    		}
 		
 		for(OrdenTrabajo orden : ordenesDB) {
 		    System.out.println("🆔 ID: " + orden.getId());

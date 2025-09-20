@@ -102,8 +102,6 @@ public class OrdenTrabajoDAO {
         		LocalDateTime fechaIngresoFinal = null;
         		LocalDateTime fechaRetiroFinal = null;
         		
-        		System.out.println("DOESNT WORKS");
-        		
         		//Prepare fecha field:
         		if (fechaStr != null && !fechaStr.isEmpty()) {
     			    try {
@@ -146,10 +144,7 @@ public class OrdenTrabajoDAO {
     		
     	}catch (SQLException e) {
     		e.printStackTrace();
-    	}
-    	
-    	System.out.println("Hola ");
-    	
+    	}    	
     	return lista;
     }
 }

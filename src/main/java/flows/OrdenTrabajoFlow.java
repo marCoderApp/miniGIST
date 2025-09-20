@@ -61,10 +61,7 @@ public class OrdenTrabajoFlow {
         OrdenTrabajoDAO dao = new OrdenTrabajoDAO();
         dao.guardar(orden);
     }
-    
-
-
-
+ 
     public static void listarOrdenes() {
         System.out.println("\n📦 Órdenes registradas:");
         servicio.listarOrdenes();
