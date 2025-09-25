@@ -26,8 +26,8 @@ public class DBInitializer {
         		cliente_id TEXT PRIMARY KEY,
         		nombre_cliente TEXT,
         		apellido_cliente TEXT,
-        		empresa TEXT,
-        		telefono TEXT
+        		telefono TEXT,
+        		empresa TEXT
         		);
         		""";
         
@@ -61,7 +61,17 @@ public class DBInitializer {
         String sqlRepuestos = """
         		CREATE TABLE IF NOT EXISTS repuestos (
         		id TEXT PRIMARY KEY,
+        		codigo_repuestos TEXT,
         		nombre_repuesto TEXT,
+        		cantidad INT,
+        		precio REAL
+        		);
+        		""";
+        String sqlPedidos = """
+        		CREATE TABLE IF NOT EXISTS pedidos (
+        		id TEXT PRIMARY KEY,
+        		orden_trabajo_id NULL, 
+        		repuestos_descripcion TEXT,
         		precio REAL
         		);
         		""";
@@ -74,7 +84,8 @@ public class DBInitializer {
             stmt.execute(sqlPresupuestos);
             stmt.execute(sqlDetalles_presupuesto);
             stmt.execute(sqlRepuestos);
-        } catch (SQLException e) {
+            stmt.execute(sqlPedidos);
+            } catch (SQLException e) {
             e.printStackTrace();
         }
     }

@@ -27,8 +27,9 @@ public class Main {
             System.out.println("║ 5. Gestionar técnicos                   ║");
             System.out.println("║ 6. Gestionar repuestos                  ║");
             System.out.println("║ 7. Generar presupuesto                  ║");
-            System.out.println("║ 8. Consultar estado de una orden        ║");
-            System.out.println("║ 9. Salir                                ║");
+            System.out.println("║ 8. Generar pedidos                      ║");
+            System.out.println("║ 9. Consultar estado de una orden        ║");
+            System.out.println("║ 10. Salir                                ║");
             System.out.println("╚═════════════════════════════════════════╝");
             System.out.print("Seleccioná una opción: ");
 
@@ -57,9 +58,12 @@ public class Main {
                     PresupuestoFlow.generarPresupuesto(scanner);
                     break;
                 case "8":
-                    OrdenTrabajoFlow.consultarEstado(scanner);
+                    PresupuestoFlow.generarPresupuesto(scanner);
                     break;
                 case "9":
+                    OrdenTrabajoFlow.consultarEstado(scanner);
+                    break;
+                case "10":
                     salir = true;
                     System.out.println("👋 Cerrando MiniGist CRM. ¡Hasta la próxima!");
                     break;
